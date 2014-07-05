@@ -1,0 +1,14 @@
+package saccsconf;
+require Exporter;
+require 'dbpass.pl';
+@ISA=qw(Exporter);
+@EXPORT_OK=qw($dbd $dbuser $dbpass $dbh $html_root);
+$dbuser='saccsp';
+$dbh='dbi:mysql:YOUR_DATABASE_NAME_HERE:localhost';
+$dbd = {
+ PrintError => 1,
+ RaiseError => 0,
+ AutoCommit => 0
+};
+$html_root="/cgi-bin/saccs/";
+1;

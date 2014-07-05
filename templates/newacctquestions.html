@@ -1,0 +1,46 @@
+<h1>New
+    <!-- TMPL_IF NAME=CC -->
+    Credit card
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME=BANK -->
+    bank
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME=COMMUNITY -->
+    community
+    <!-- /TMPL_IF -->
+    account
+</h1>
+
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="create"/>
+    <input type="hidden" name="type" value="<!-- TMPL_VAR NAME=TYPE -->"/>
+    <table>
+        <tr>
+            <td>Account name: </td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <!-- TMPL_IF NAME=BANK -->
+        <tr>
+            <td>Beginning date:</td>
+            <td>
+                Year:
+                <input type="text" name="year" value="<!-- TMPL_VAR NAME=CURRYEAR -->" size="4"/>
+                Month:
+                <!-- TMPL_INCLUDE NAME=monthdropdown.html -->
+            </td>
+        </tr>
+        <tr>
+            <td>Beginning balance:</td>
+            <td><input type="text" name="startamt" size="6" value="0.00"/></td>
+        </tr>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME=CC -->
+        <tr>
+            <td>Credit limit:</td>
+            <td><input type="text" name="startamt" size="6" value="0.00"/></td>
+        </tr>
+        <!-- /TMPL_IF -->
+    </table>
+
+    <input type="submit" value=" Open this account "/>
+</form>

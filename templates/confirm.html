@@ -1,0 +1,28 @@
+<table class="accounttable">
+    <tr>
+        <td>
+            <img src="clear.png" width="0" height="200">
+        </td>
+        <td>
+            <img src="clear.png" width="0" height="50">
+            <form method="post" action="index.pl">
+
+                <input type="hidden" name="action" value="<!-- TMPL_VAR NAME=ACTION -->"/>
+                <input type="hidden" name="yes" value="yes"/>
+                <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+                <input type="hidden" name="details" value="<!-- TMPL_VAR NAME=DETAILS -->"/>
+                <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+                <input type="hidden" name="ids" value="<!-- TMPL_VAR NAME=IDS -->"/>
+                <input type="hidden" name="personids" value="<!-- TMPL_VAR NAME=PERSONIDS -->"/>
+                <p style="text-align: center">
+                <!-- TMPL_VAR NAME=MSG -->
+                <br/>
+                <input type="submit" value=" &nbsp; Yes &nbsp; "/>
+                <input type="reset" onclick="javascript:history.go(-1);" value=" &nbsp; No &nbsp; "/>
+                </p>
+            </form>
+            
+
+</td>
+</tr>
+</table>

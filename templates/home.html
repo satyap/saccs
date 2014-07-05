@@ -1,0 +1,77 @@
+<h2>Account management</h2>
+<fieldset>
+<legend>Create account</legend>
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="create"/>
+
+    Type: 
+
+    <select name="type">
+        <option value="bank">Bank</option>
+        <option value="cc">Credit card</option>
+        <option value="community">Community</option>
+    </select>
+    <input type="submit" value=" Create "/>
+</form>
+</fieldset>
+
+<fieldset>
+<legend>Delete account</legend>
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="delacct"/>
+    Select account to delete:
+    <select name="acid">
+        <!-- TMPL_LOOP NAME=ACCTS -->
+        <option value="<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=NAME --></option>
+        <!-- /TMPL_LOOP -->
+    </select>
+    <input type="submit" value=" Delete "/>
+</form>
+</fieldset>
+
+
+<h2>Transfer</h1>
+
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="xfer"/>
+
+    <table>
+        <tr>
+            <td>From: </td>
+            <td>
+                <select name="from">
+                    <!-- TMPL_LOOP NAME=ACCTS -->
+                    <option value="<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=NAME --></option>
+                    <!-- /TMPL_LOOP -->
+                </select>
+            </td>
+            <td>Description:</td>
+            <td>
+                <input type="text" name="descrfrom" id="descfromres" />
+                <p id="dfres"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>To:</td>
+            <td>
+                <select name="to">
+                    <!-- TMPL_LOOP NAME=ACCTS -->
+                    <option value="<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=NAME --></option>
+                    <!-- /TMPL_LOOP -->
+                </select>
+            </td>
+            <td>Description:</td>
+            <td>
+                <input type="text" name="descrto" id="desctores" />
+                <p id="dtres"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount: </td>
+            <td><input type="text" name="amt" size="10"/></td>
+            <td><input type="submit" value="Transfer"/></td>
+        </tr>
+    </table>
+
+</form>
+

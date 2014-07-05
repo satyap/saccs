@@ -1,0 +1,16 @@
+<!-- TMPL_IF NAME=GRAPHCONSOL -->
+Combined graph |
+<a href="index.pl?action=graphs">Separate graph</a>
+<!-- TMPL_ELSE -->
+<a href="index.pl?action=graphs&subaction=consol">Combined graph</a> |
+Separate graphs
+<p>
+<img src="graph.pl?acid=-1&amp;title=Total"/>
+</p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_LOOP NAME=GRAPHLINKS -->
+<p>
+<img src="graph.pl?acid=<!-- TMPL_VAR NAME=ID -->"/>
+</p>
+<!-- /TMPL_LOOP -->

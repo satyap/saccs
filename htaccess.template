@@ -1,0 +1,6 @@
+<Files *>
+AuthName "YOUR SITE TITLE"
+AuthType Basic
+AuthUserFile /PATH/TO/YOUR/.htpass
+require user YOUR_USER
+</Files>

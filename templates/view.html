@@ -1,0 +1,60 @@
+
+<table class="accounttable">
+<tr>
+    
+<!-- TMPL_IF NAME=BANK --><!-- TMPL_INCLUDE NAME="leftmenu.html" --><!-- /TMPL_IF -->
+
+<td>
+    <p>
+    <span class="accountname">
+        <form method="post" action="index.pl" style="display: inline">
+            <input type="hidden" name="action" value="renacct"/>
+            <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+            <input type="text" name="name" value="<!-- TMPL_VAR NAME=ACNAME -->"/>
+            <input type="submit" value="Rename account">
+        </form>
+    </span>
+    [<a href="index.pl?action=delacct&amp;acid=<!-- TMPL_VAR NAME=ACID -->">delete</a>]
+    </p>
+    
+<!-- data goes here -->
+
+<!-- TMPL_IF NAME=MONTHLYVIEW -->
+
+<table class="monthlist" border="1" cellspacing="0">
+    <tr>
+        <th>Month</th>
+        <th>Start</th>
+        <th>End</th>
+    </tr>
+    <!-- TMPL_LOOP NAME=MONTHS -->
+    <tr>
+        <td>
+            <a href="index.pl?action=view&amp;acid=<!-- TMPL_VAR NAME=account -->&amp;details=1&amp;monthlyid=<!-- TMPL_VAR NAME=id -->"><!-- TMPL_VAR NAME=startdate --></a>
+        </td>
+        <td class="currency">
+            <!-- TMPL_IF NAME=MISMATCH -->
+            <span class="mismatch">
+                <!-- /TMPL_IF -->
+                <!-- TMPL_VAR NAME=startamt -->
+                <!-- TMPL_IF NAME=MISMATCH -->
+            </span>
+            <!-- /TMPL_IF -->
+        </td>
+        <td class="currency">
+            <!-- TMPL_VAR NAME=endamt -->
+        </td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+</table>
+
+<!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME=COMMUNITY -->
+        <!-- TMPL_INCLUDE NAME=community.html -->
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_INCLUDE NAME=details.html -->
+    <!-- /TMPL_IF community -->
+<!-- /TMPL_IF monthlyview -->
+
+
+</td></tr></table>

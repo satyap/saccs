@@ -1,0 +1,104 @@
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="deldetails"/>
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="details" value="1"/>
+
+    <table class="details">
+
+        <tr>
+            <th align="center">Date</th>
+            <th align="left">Description</th>
+            <!-- TMPL_LOOP NAME=MONTHS -->
+            <th class="currency"><!-- TMPL_VAR NAME=NAME -->
+                <input type="checkbox" name="delperson" value="<!-- TMPL_VAR NAME=PERSONID -->"></a></th>
+        <!-- /TMPL_LOOP -->
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <!-- TMPL_LOOP NAME=DETAILS -->
+    <tr>
+        <td align="center"><!-- TMPL_VAR NAME=ONDATE --></td>
+        <td align="left"><!-- TMPL_VAR NAME=DESCR --></td>
+        <!-- TMPL_LOOP NAME=AMTS -->
+        <td class="currency"><!-- TMPL_VAR NAME=AMT --></td>
+        <!-- /TMPL_LOOP -->
+        <td align="center">
+            <input type="checkbox" name="del" value="<!-- TMPL_VAR NAME=ID -->"/>
+        </td>
+        <td align="center">
+            <a href="index.pl?action=edit&amp;id=<!-- TMPL_VAR NAME=ID -->&amp;acid=<!-- TMPL_VAR NAME=ACCOUNT -->&amp;community=1">Edit</a>
+        </td>
+    </tr>
+
+    <!-- /TMPL_LOOP -->
+
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <!-- TMPL_LOOP NAME=TOTALS -->
+        <td class="currency total"><!-- TMPL_VAR NAME=TOTAL --></td>
+        <!-- /TMPL_LOOP -->
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <!-- TMPL_LOOP NAME=MONTHS -->
+        <th>
+            <!-- TMPL_VAR NAME=NAME -->
+            <a href="index.pl?action=resetperson&acid=<!-- TMPL_VAR NAME=ACID -->&pid=<!-- TMPL_VAR NAME=PERSONID -->&details=1">Reset</a>
+        </th>
+        <!-- /TMPL_LOOP -->
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+<p align="right">
+<input type="submit" value="Delete marked entries/people"/>
+</p>
+
+</form>
+
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="adddetail"/>
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="details" value="1"/>
+    <table class="details">
+        <tr>
+            <td>
+                <input type="text" size="4" name="year" value="<!-- TMPL_VAR NAME=CURRYEAR -->"/>
+                <!-- TMPL_INCLUDE NAME=monthdropdown.html -->
+                <!-- TMPL_INCLUDE NAME=datedropdown.html -->
+            </td>
+            <td>
+                <input type="text" name="descr" />
+            </td>
+            <td>
+                <select name="person">
+                    <!-- TMPL_LOOP NAME=MONTHS -->
+                    <option value="<!-- TMPL_VAR NAME=PERSONID -->">
+                    <!-- TMPL_VAR NAME=NAME -->
+                    </option>
+                    <!-- /TMPL_LOOP -->
+                </select>
+            </td>
+            <td class="currency"><input type="text" name="amt" size="5"/></td>
+            <td><input type="submit" value="Enter"/></td>
+        </tr>
+
+    </table>
+</form>
+
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="community"/>
+    <input type="hidden" name="addname" value="1"/>
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    Add name:
+    <input type="text" name="name"/>
+    <input type="submit" value="Add"/>
+</form>
+<p/>
+

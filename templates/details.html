@@ -1,0 +1,167 @@
+
+<!-- TMPL_IF NAME=BANK -->
+
+<table class="acheader">
+    <tr>
+        <td>
+            <form method="post" action="index.pl">
+                <input type="hidden" name="action" value="chg_start_date"/>
+                <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+                <input type="hidden" name="details" value="1"/>
+                <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+                From: 
+                <input type="text" name="date" value="<!-- TMPL_VAR NAME=STARTDATE -->" style="width: 8em;" />
+                <input type="submit" value="Chg" />
+            </form>
+        </td>
+        <td>
+            <form method="post" action="index.pl">
+                <input type="hidden" name="action" value="chg_end_date"/>
+                <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+                <input type="hidden" name="details" value="1"/>
+                <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+                To: 
+                <input type="text" name="date" value="<!-- TMPL_VAR NAME=ENDDATE -->" style="width: 8em;" />
+                <input type="submit" value="Chg" />
+            </form>
+        </td>
+        <td>Start amount: <!-- TMPL_VAR NAME=STARTAMT --></td>
+    </tr>
+</table>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME=CC -->
+<table border="1" class="summary">
+    <tr>
+        <td>&nbsp;</td>
+        <td>Cleared</td>
+        <td>Actual</td>
+    </tr>
+    <tr>
+        <td>Credit limit:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLIMIT --></td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLIMIT --></td>
+    </tr>
+    <tr>
+        <td>Balance:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLEAREDBAL --></td>
+        <td class="currency"><!-- TMPL_VAR NAME=BAL --></td>
+    </tr>
+    <tr>
+        <td>Available:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLEAREDAVAIL --></td>
+        <td class="currency"><!-- TMPL_VAR NAME=AVAIL --></td>
+    </tr>
+</table>
+<form action="index.pl?action=chg_credit_limit" method="post">
+    <input type="hidden" name="action" value="chg_credit_limit" />
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="details" value="1"/>
+    <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+    Change credit limit: <input type="text" name="new_limit" />
+    <input type="submit" value="change"/>
+</form>
+<!-- /TMPL_IF -->
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="adddetail"/>
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+    <!-- input type="hidden" name="view" value="1"/ -->
+    <input type="hidden" name="details" value="1"/>
+    <table class="details">
+        <tr>
+            <td>
+                <input type="text" size="4" name="year" value="<!-- TMPL_VAR NAME=CURRYEAR -->"/>
+                <!-- TMPL_INCLUDE NAME=monthdropdown.html -->
+                <!-- TMPL_INCLUDE NAME=datedropdown.html -->
+            </td>
+            <td>
+                <input type="text" name="descr" />
+                <p id="desc"></p>
+                                
+            </td>
+            <td class="currency"><input type="text" name="amt" size="5"/></td>
+            <td><input type="submit" value="Enter"/></td>
+        </tr>
+
+    </table>
+
+</form>
+
+<form method="post" action="index.pl">
+    <input type="hidden" name="action" value="deldetails"/>
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="details" value="1"/>
+    <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+
+    <table class="details">
+
+        <tr>
+            <th align="center">Date</th>
+            <th align="left">Description</th>
+            <th align="right">Amount</th>
+            <th align="center">Cleared?</th>
+            <th align="center">Delete</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        <!-- TMPL_LOOP NAME=DETAILS -->
+        <tr>
+            <td align="center"><!-- TMPL_VAR NAME=ONDATE --></td>
+            <td align="left"><!-- TMPL_VAR NAME=DESCR --></td>
+            <td class="currency"><!-- TMPL_VAR NAME=AMT --></td>
+            <td align="center">
+                <a href="index.pl?action=flipflag&id=<!-- TMPL_VAR NAME=ID -->&amp;acid=<!-- TMPL_VAR NAME=ACCOUNT -->&amp;details=1&amp;monthlyid=<!-- TMPL_VAR NAME=MONTHLYID -->">
+                    <!-- TMPL_IF NAME=CLEARED -->
+                    <span style="color: green">Yes</span><!-- TMPL_ELSE -->
+                    <span style="color: red">N</span><!-- /TMPL_IF --></a>
+            </td>
+            <td align="center">
+                <label for="del<!-- TMPL_VAR NAME=ID -->" class="lonecheckbox">
+                    &nbsp;&nbsp;
+                    <input type="checkbox" name="del" value="<!-- TMPL_VAR NAME=ID -->" id="del<!-- TMPL_VAR NAME=ID -->" />
+                    &nbsp;&nbsp;
+                </label>
+            </td>
+            <td align="center">
+                <a href="index.pl?action=edit&amp;id=<!-- TMPL_VAR NAME=ID -->&amp;acid=<!-- TMPL_VAR NAME=ACCOUNT -->&amp;details=1&amp;monthlyid=<!-- TMPL_VAR NAME=MONTHLYID -->">Edit</a>
+            </td>
+        </tr>
+
+        <!-- /TMPL_LOOP -->
+
+    </table>
+
+    <p align="right">
+
+    <input type="submit" value="Delete marked entries"/>
+    </p>
+
+</form>
+
+
+<p/>
+
+<!-- Summary block -->
+
+<!-- TMPL_IF NAME=BANK -->
+<table border="1" class="summary">
+    <tr>
+        <td>Balance:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=BAL --></td>
+    </tr>
+    <tr>
+        <td>Cleared balance:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLEARED --></td>
+    </tr>
+    <tr>
+        <td>Difference:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=DIFFERENCE --></td>
+    </tr>
+    <tr>
+        <td>Net outflow:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=OUTFLOW --></td>
+    </tr>
+</table>
+<!-- /TMPL_IF -->

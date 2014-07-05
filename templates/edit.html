@@ -1,0 +1,56 @@
+<table class="accounttable">
+    <tr>
+        <td>
+<form method="post" action="index.pl">
+    <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
+    <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->"/>
+    <input type="hidden" name="action" value="edit"/>
+    <input type="hidden" name="save" value="1"/>
+    <input type="hidden" name="details" value="1"/>
+    <input type="hidden" name="monthlyid" value="<!-- TMPL_VAR NAME=MONTHLYID -->"/>
+    <table>
+        <tr>
+            <td>
+                Date:
+                </td><td>
+                <input type="text" name="year" value="<!-- TMPL_VAR NAME=YEAR -->" size="4"/>
+
+                <!-- TMPL_INCLUDE NAME=monthdropdown.html -->
+                <!-- TMPL_INCLUDE NAME=datedropdown.html -->
+            </td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>
+                <input type="text" name="descr" value="<!-- TMPL_VAR NAME=descr -->"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount:</td>
+            <td>
+                <input type="text" name="amt" value="<!-- TMPL_VAR NAME=AMT -->"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Cleared: </td>
+            <td>
+                <select name="cleared">
+                    <option value="y"
+                    <!-- TMPL_IF NAME=CLEARED -->selected="selected"<!-- /TMPL_IF -->
+                    >Yes</option>
+                    <option value="n"
+                    <!-- TMPL_UNLESS NAME=CLEARED -->selected="selected"<!-- /TMPL_UNLESS -->
+                    >No</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="change" value="Save changes"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</td>
+</tr>
+</table>

@@ -1,0 +1,25 @@
+<td class="leftmenu">
+    <form method="post" action="index.pl">
+        <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ACID -->"/>
+        <input type="hidden" name="action" value="newmonth"/>
+        Start new month:
+        <br/>
+        <!-- TMPL_INCLUDE NAME=monthdropdown.html -->
+        <input type="text" name="year" value="<!-- TMPL_VAR NAME=CURRYEAR -->" size="4"/>
+        <br/>
+        with:
+        $<input type="text" name="startamt" value="<!-- TMPL_IF NAME=BAL --><!-- TMPL_VAR NAME=BAL --><!-- TMPL_ELSE -->0.00<!-- /TMPL_IF -->" size="8" class="currency"/>
+        <input type="submit" value="Start new month"/>
+    </form>
+
+    <ul>
+        <!-- TMPL_LOOP NAME=MONTHSR -->
+        <li>
+        <a href="index.pl?action=view&amp;acid=<!-- TMPL_VAR NAME=account -->&amp;details=1&amp;monthlyid=<!-- TMPL_VAR NAME=id -->">
+            <!-- TMPL_VAR NAME=startdate -->
+        </a>
+        </li>
+        <!-- /TMPL_LOOP -->
+
+    </td>
+

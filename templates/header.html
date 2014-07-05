@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Saccs</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+        <!-- script type="text/javascript" src="saccs.js"></script -->
+        <div class="mainbody">
+            <table class="menu">
+                <tr>
+                    <td><a href="<!-- TMPL_VAR NAME=HTML_ROOT -->">Home</a></td>
+                    <!-- TMPL_IF NAME=ACCTS -->
+                    <td><a href="index.pl?action=graphs&subaction=consol">Graphs</a>
+                    </td>
+                    <!-- /TMPL_IF -->
+                    <!-- TMPL_LOOP NAME=ACCTS -->
+                    <td><a href="index.pl?action=view&amp;acid=<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=NAME --></a>
+                    </td>
+                    <!-- /TMPL_LOOP -->
+                </tr>
+            </table>
+
