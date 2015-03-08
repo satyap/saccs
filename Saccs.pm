@@ -1,4 +1,5 @@
 package Saccs;
+use Text::CSV;
 
 # Satya's accounts program a.k.a. Saccs of Gold.
 
@@ -696,6 +697,48 @@ sub getacctdata() {
     return $row;
 } # getacctdata
 
+sub download() {
+    my $self = shift;
+    my $id = shift;
+    my $month_id = shift;
+    my $sth;
+
+    print "Content-type: text/plain\n\n";
+
+    if($month_id) {
+        $sth=$self->{'dbh'}->prepare('SELECT * FROM `details` 
+            LEFT JOIN monthly ON startdate <= ondate 
+                AND enddate >= ondate
+                AND monthly.account = details.account
+            WHERE monthly.id=? 
+            ORDER BY `ondate` ASC,`descr`');
+        $sth->execute($month_id);
+    } else {
+        $sth=$self->{'dbh'}->prepare('SELECT * FROM `details` WHERE `account`=? ORDER BY `ondate` ASC,`descr`');
+        $sth->execute($id);
+    }
+
+    my $csv = Text::CSV->new or print "Cannot use CSV: ".Text::CSV->error_diag();
+    
+    my $first = 1;
+    my @keys;
+    while(my $row = $sth->fetchrow_hashref()) {
+        if(1==$first) {
+            @keys = ('ondate', 'cleared', 'amt', 'descr');
+            $first = 0;
+            $csv->combine(@keys);
+            print $csv->string;
+            print "\r\n";
+        }
+
+        $csv->combine(
+            map { $row->{$_} } @keys
+        );
+        print $csv->string;
+        print "\r\n";
+    }
+
+} # download
 
 sub addname() {
     # add name to people table for community account

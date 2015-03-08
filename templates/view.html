@@ -15,6 +15,11 @@
         </form>
     </span>
     [<a href="index.pl?action=delacct&amp;acid=<!-- TMPL_VAR NAME=ACID -->">delete</a>]
+    <!-- TMPL_IF NAME=MONTHLYVIEW -->
+    [<a href="index.pl?action=download&amp;acid=<!-- TMPL_VAR NAME=ACID -->">download</a>]
+    <!-- TMPL_ELSE -->
+    [<a href="index.pl?action=download&amp;acid=<!-- TMPL_VAR NAME=ACID -->&amp;monthlyid=<!-- TMPL_VAR NAME=MONTHLYID -->">download</a>]
+    <!-- /TMPL_IF monthlyview -->
     </p>
     
 <!-- data goes here -->

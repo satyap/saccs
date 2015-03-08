@@ -117,6 +117,11 @@ elsif($action eq 'edit') {
     }
 }
 
+elsif($action eq 'download') {
+    $saccs->download($q->param('acid'), $q->param('monthlyid'));
+    exit;
+}
+
 elsif($action eq 'delacct' && !defined $q->param('yes')) {
     $template=HTML::Template->new(
         filename => 'templates/confirm.html',
