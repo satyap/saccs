@@ -282,7 +282,7 @@ sub showdetail() {
     my $clearedbal=$startamt;
     my $bal=$startamt;
 
-    $sql='SELECT * FROM `details` WHERE `account`=? AND `ondate`>=? AND `ondate`<=? ORDER BY `ondate`, `descr`';
+    $sql='SELECT * FROM `details` WHERE `account`=? AND `ondate`>=? AND `ondate`<=? ORDER BY `ondate` desc, `descr`';
 
     $sth=$dbh->prepare($sql);
     $sth->execute($id,$startdate,$enddate) || $self->error($DBI::errstr);

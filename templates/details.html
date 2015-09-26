@@ -30,6 +30,25 @@
 </table>
 <!-- /TMPL_IF -->
 
+<!-- Summary block -->
+
+<!-- TMPL_IF NAME=BANK -->
+<table border="1" class="summary">
+    <tr>
+        <td>Balance:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=BAL --></td>
+        <td>Cleared balance:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=CLEARED --></td>
+    </tr>
+    <tr>
+        <td>Difference:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=DIFFERENCE --></td>
+        <td>Net outflow:</td>
+        <td class="currency"><!-- TMPL_VAR NAME=OUTFLOW --></td>
+    </tr>
+</table>
+<!-- /TMPL_IF -->
+
 <!-- TMPL_IF NAME=CC -->
 <table border="1" class="summary">
     <tr>
@@ -62,6 +81,7 @@
     <input type="submit" value="change"/>
 </form>
 <!-- /TMPL_IF -->
+
 <form method="post" action="index.pl">
     <input type="hidden" name="action" value="adddetail"/>
     <input type="hidden" name="acid" value="<!-- TMPL_VAR NAME=ACID -->"/>
@@ -143,25 +163,3 @@
 
 <p/>
 
-<!-- Summary block -->
-
-<!-- TMPL_IF NAME=BANK -->
-<table border="1" class="summary">
-    <tr>
-        <td>Balance:</td>
-        <td class="currency"><!-- TMPL_VAR NAME=BAL --></td>
-    </tr>
-    <tr>
-        <td>Cleared balance:</td>
-        <td class="currency"><!-- TMPL_VAR NAME=CLEARED --></td>
-    </tr>
-    <tr>
-        <td>Difference:</td>
-        <td class="currency"><!-- TMPL_VAR NAME=DIFFERENCE --></td>
-    </tr>
-    <tr>
-        <td>Net outflow:</td>
-        <td class="currency"><!-- TMPL_VAR NAME=OUTFLOW --></td>
-    </tr>
-</table>
-<!-- /TMPL_IF -->
