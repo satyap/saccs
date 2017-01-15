@@ -1,5 +1,5 @@
 %p
   Balance:
-  = number_to_currency @transactions.sum(:amount)
+  = number_to_currency @transactions.sum(:amount) + @account.beginning_balance(session[:month])
   Cleared balance:
-  = number_to_currency @transactions.cleared.sum(:amount)
+  = number_to_currency @transactions.cleared.sum(:amount) +  + @account.beginning_balance(session[:month], true)
