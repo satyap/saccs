@@ -1,0 +1,7 @@
+$("#transaction_<%= @transaction.id %>").html("<%= escape_javascript(
+  render partial: '/accounts/transaction_row', locals: {tr: @transaction}
+) %>");
+
+$("#balances").html("<%= escape_javascript(
+  render partial: '/accounts/balances'
+) %>")

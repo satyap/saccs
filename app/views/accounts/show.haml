@@ -1,0 +1,26 @@
+%h1
+  = @account.name
+  = session[:month]
+
+.month_list
+  - @account.months.each_pair do |year, months|
+    - months.each do |m|
+      = link_to m.month, account_path(@account.id, month: m.month)
+    %br
+
+= render partial: '/transactions/form'
+
+#balances
+  = render partial: 'balances'
+
+%table{border: 1, cellspacing: 0, cellpadding: 2}
+  %tr
+    %th Date
+    %th Description
+    %th Amount
+    %th Cleared?
+    %th &nbsp;
+
+  - @transactions.each do |tr|
+    %tr{id: "transaction_#{tr.id}"}
+      = render :partial => 'transaction_row', locals: {tr: tr}

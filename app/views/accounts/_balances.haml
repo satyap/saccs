@@ -1,0 +1,5 @@
+%p
+  Balance:
+  = number_to_currency @transactions.sum(:amount)
+  Cleared balance:
+  = number_to_currency @transactions.cleared.sum(:amount)
