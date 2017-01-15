@@ -1,6 +1,6 @@
 %td= tr.date
 %td= tr.description
 %td= number_to_currency tr.amount
-%td.clearance
+%td.clearance{class: tr.cleared? && 'cleared'}
   = link_to tr.cleared? ? 'Y' : 'N', clear_transaction_path(tr.id), method: :post, remote: true
 %td= link_to 'Edit', edit_transaction_path(tr)

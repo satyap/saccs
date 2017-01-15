@@ -20,4 +20,10 @@
 }
 .clearance a {
   display: block;
+    color: red;
+    background-color: #ddd;
+    text-decoration: none;
+}
+.clearance.cleared a {
+    color: green;
 }
