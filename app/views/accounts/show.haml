@@ -1,14 +1,19 @@
 %h1
-  = @account.name
-  = session[:month]
+  %span#toggle_months{onclick: '$("#month_list, #toggle_months_open, #toggle_months_close").toggle()'}
+    = @account.name
+    = session[:month]
 
-.month_list
+    %span#toggle_months_open >
+    %span#toggle_months_close v
+
+#month_list
   - @account.months.each_pair do |year, months|
     - months.each do |m|
       = link_to m.month, account_path(@account.id, month: m.month)
     %br
 
-= render partial: '/transactions/form'
+%div{style: "margin-top: 1em"}
+  = render partial: '/transactions/form'
 
 #balances
   = render partial: 'balances'

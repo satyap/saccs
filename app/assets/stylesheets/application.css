@@ -14,6 +14,15 @@
  *= require_self
  */
 
+
+#toggle_months {
+    cursor: pointer;
+}
+
+#month_list, #toggle_months_close{
+    display: none;
+}
+
 .clearance {
   width: 5em;
   text-align: center;
