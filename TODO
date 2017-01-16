@@ -1,4 +1,10 @@
+Write test for clearance toggle
 Add LICENSE
 Add README
 Create github project
-Write test for clearance toggle
+User can delete transactions
+User can add new month
+User can edit month
+User can delete month
+User can add a transfer transaction
+List archived accounts on home page

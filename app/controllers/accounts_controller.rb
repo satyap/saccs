@@ -10,18 +10,21 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
-    if params[:month]
-      session[:month] = params[:month]
+    if params[:month_id]
+      session[:month_id] = params[:month_id]
     else
-      session[:month] ||= @account.month
+      unless session[:month_id] and @account.monthly_ids.include?(session[:month_id])
+        @month = @account.latest_month
+        session[:month_id] = @month.id
+      end
     end
+    @month ||= Monthly.find(session[:month_id])
     @transaction = Transaction.new(
       account_id: @account.id,
-      date_year: Date.today.year,
-      date_month: Date.today.month,
+      date_year: @month.year,
+      date_month: @month.month,
       date_day: Date.today.day,
       amount: 0.0,
     )
-    @transactions = @account.transactions_by_month(session[:month])
   end
 end
