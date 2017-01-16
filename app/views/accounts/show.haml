@@ -17,12 +17,13 @@
 #balances
   = render partial: 'balances'
 
-%table{border: 1, cellspacing: 0, cellpadding: 2}
+%table{border: 1, cellspacing: 0, cellpadding: 4}
   %tr
     %th Date
     %th Description
     %th Amount
     %th Cleared?
+    %th &nbsp;
     %th &nbsp;
 
   - @month.transactions.each do |tr|

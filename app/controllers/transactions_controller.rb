@@ -26,6 +26,11 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    redirect_to account_path(id: Transaction.where(params[:id]).pluck(:account_id).first)
+    Transaction.destroy(params[:id])
+  end
+
   private
 
   def safe_params

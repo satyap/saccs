@@ -3,4 +3,5 @@
 %td= number_to_currency tr.amount
 %td.clearance{class: tr.cleared? && 'cleared'}
   = link_to tr.cleared? ? 'Y' : 'N', clear_transaction_path(tr.id), method: :post, remote: true
-%td= link_to 'Edit', edit_transaction_path(tr)
+%td= link_to '&nbsp; Edit &nbsp;'.html_safe, edit_transaction_path(tr)
+%td= link_to 'Delete', transaction_path(tr), method: :delete
