@@ -4,8 +4,9 @@ class AccountsController < ApplicationController
   end
 
   def create
-    Account.create(name: params[:account][:name])
-    redirect_to accounts_path
+    ac = Account.create!(name: params[:account][:name])
+    Monthly.create!(account: ac, name: Date.today.strftime('%Y-%m'), start_amount: 0)
+    redirect_to account_path(ac.id)
   end
 
   def show
@@ -26,5 +27,6 @@ class AccountsController < ApplicationController
       date_day: Date.today.day,
       amount: 0.0,
     )
+    @month.update_amounts!
   end
 end

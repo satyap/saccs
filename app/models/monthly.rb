@@ -17,6 +17,18 @@ class Monthly < ActiveRecord::Base
       order('date_day desc, id desc')
   end
 
+  def balance
+    transactions.sum(:amount) || 0
+  end
+
+  def cleared_balance
+    transactions.cleared.sum(:amount) || 0
+  end
+
+  def update_amounts!
+    update!(end_amount: start_amount + balance)
+  end
+
   def self.oldmig
     connection.execute(<<-SQL)
       insert into monthlies (id,account_id, start_amount, end_amount, name)
