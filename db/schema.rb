@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114044025) do
+ActiveRecord::Schema.define(version: 20170116023243) do
 
   create_table "accounts", force: :cascade do |t|
     t.string  "name"
     t.boolean "archived", default: false
+  end
+
+  create_table "monthlies", force: :cascade do |t|
+    t.integer "account_id"
+    t.string  "name"
+    t.decimal "start_amount", precision: 10, scale: 2
+    t.decimal "end_amount",   precision: 10, scale: 2
   end
 
   create_table "transactions", force: :cascade do |t|

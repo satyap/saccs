@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   has_many :transactions
+  has_many :monthlies
 
   scope :archived, -> { where(archived: true) }
   scope :active, -> { where.not(archived: true) }
