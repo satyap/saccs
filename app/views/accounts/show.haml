@@ -7,7 +7,7 @@
     %span#toggle_months_close v
 
 #month_list
-  - @account.monthlies.order('name desc').each do |m|
+  - @account.months.order('name desc').each do |m|
     = link_to m.name, account_path(@account.id, month_id: m.id)
     %br
 

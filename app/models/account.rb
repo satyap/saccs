@@ -1,12 +1,12 @@
 class Account < ActiveRecord::Base
   has_many :transactions
-  has_many :monthlies
+  has_many :months
 
   scope :archived, -> { where(archived: true) }
   scope :active, -> { where.not(archived: true) }
 
   def latest_month
-    monthlies.order('name desc').first
+    months.order('name desc').first
   end
 
   def self.oldmig

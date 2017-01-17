@@ -1,4 +1,4 @@
-class Monthly < ActiveRecord::Base
+class Month < ActiveRecord::Base
   belongs_to :account
 
   def month
@@ -31,7 +31,7 @@ class Monthly < ActiveRecord::Base
 
   def self.oldmig
     connection.execute(<<-SQL)
-      insert into monthlies (id,account_id, start_amount, end_amount, name)
+      insert into monthly (id,account_id, start_amount, end_amount, name)
       select id,account, startamt, endamt,
       strftime("%Y-%m", startdate)
       from monthly;

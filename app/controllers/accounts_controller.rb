@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
 
   def create
     ac = Account.create!(name: params[:account][:name])
-    Monthly.create!(account: ac, name: Date.today.strftime('%Y-%m'), start_amount: 0)
+    Month.create!(account: ac, name: Date.today.strftime('%Y-%m'), start_amount: 0)
     redirect_to account_path(ac.id)
   end
 
@@ -14,12 +14,12 @@ class AccountsController < ApplicationController
     if params[:month_id]
       session[:month_id] = params[:month_id]
     else
-      unless session[:month_id] and @account.monthly_ids.include?(session[:month_id])
+      unless session[:month_id] and @account.month_ids.include?(session[:month_id])
         @month = @account.latest_month
         session[:month_id] = @month.id
       end
     end
-    @month ||= Monthly.find(session[:month_id])
+    @month ||= Month.find(session[:month_id])
     @transaction = Transaction.new(
       account_id: @account.id,
       date_year: @month.year,
