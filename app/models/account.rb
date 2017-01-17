@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   scope :active, -> { where.not(archived: true) }
 
   def latest_month
-    months.order('name desc').first
+    months.in_order.first
   end
 
   def self.oldmig

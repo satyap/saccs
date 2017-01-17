@@ -19,8 +19,8 @@ class TransactionsController < ApplicationController
   def clear
     @transaction = Transaction.find(params[:id])
     @transaction.toggle_clear!
-    @month = Month.find(session[:month_id])
-    @month.update_amounts!
+    @current_month = Month.find(session[:month_id])
+    @current_month.update_amounts!
     respond_to do |format|
       format.js
     end

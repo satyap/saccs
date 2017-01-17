@@ -6,10 +6,14 @@
     %span#toggle_months_open >
     %span#toggle_months_close v
 
-#month_list
-  - @account.months.in_order.each do |m|
-    = link_to m.name, account_path(@account.id, month_id: m.id)
-    %br
+#months
+  = render partial: '/months/form'
+
+  #month_list
+    - @account.months.in_order.each_slice(4) do |months|
+      - months.each do |m|
+        = link_to "#{m.name}", account_path(@account.id, month_id: m.id)
+      %br
 
 %div{style: "margin-top: 1em"}
   = render partial: '/transactions/form'
@@ -26,6 +30,6 @@
     %th &nbsp;
     %th &nbsp;
 
-  - @month.transactions.each do |tr|
+  - @current_month.transactions.each do |tr|
     %tr{id: "transaction_#{tr.id}"}
       = render :partial => 'transaction_row', locals: {tr: tr}

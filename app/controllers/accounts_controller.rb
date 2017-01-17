@@ -16,18 +16,24 @@ class AccountsController < ApplicationController
       session[:month_id] = params[:month_id]
     else
       unless session[:month_id] and @account.month_ids.include?(session[:month_id])
-        @month = @account.latest_month
-        session[:month_id] = @month.id
+        @current_month = @account.latest_month
+        session[:month_id] = @current_month.id
       end
     end
-    @month ||= Month.find(session[:month_id])
+    @current_month ||= Month.find(session[:month_id])
     @transaction = Transaction.new(
       account_id: @account.id,
-      date_year: @month.year,
-      date_month: @month.month,
+      date_year: @current_month.year,
+      date_month: @current_month.month,
       date_day: Date.today.day,
       amount: 0.0,
     )
-    @month.update_amounts!
+    @month = Month.new(
+      account_id: @account.id,
+      year: Date.today.year,
+      month: Date.today.month,
+      start_amount: @current_month.start_amount
+    )
+    @current_month.update_amounts!
   end
 end

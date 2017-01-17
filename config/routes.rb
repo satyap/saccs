@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :transactions
+  resources :months
 
   post 'transactions/clear/:id' => 'transactions#clear', as: 'clear_transaction'
 

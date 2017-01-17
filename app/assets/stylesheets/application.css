@@ -19,8 +19,18 @@
     cursor: pointer;
 }
 
-#month_list, #toggle_months_close{
+#toggle_months_close{
     display: none;
+}
+
+#months {
+    display: none;
+    border: 3px solid;
+}
+
+#months #month_list {
+    height: 15em;
+    overflow: scroll;
 }
 
 .clearance {
