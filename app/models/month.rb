@@ -1,12 +1,10 @@
 class Month < ActiveRecord::Base
   belongs_to :account
 
-  def month
-    name.split('-').last
-  end
+  scope :in_order, -> { order('year desc, month desc')}
 
-  def year
-    name.split('-').first
+  def name
+    sprintf("%04d-%02d", year, month)
   end
 
   def transactions
@@ -31,9 +29,10 @@ class Month < ActiveRecord::Base
 
   def self.oldmig
     connection.execute(<<-SQL)
-      insert into monthly (id,account_id, start_amount, end_amount, name)
+      insert into monthly (id,account_id, start_amount, end_amount, `year`, `month`)
       select id,account, startamt, endamt,
-      strftime("%Y-%m", startdate)
+      strftime("%Y", startdate),
+      strftime("%m", startdate)
       from monthly;
     SQL
   end

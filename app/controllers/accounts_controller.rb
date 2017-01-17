@@ -5,7 +5,8 @@ class AccountsController < ApplicationController
 
   def create
     ac = Account.create!(name: params[:account][:name])
-    Month.create!(account: ac, name: Date.today.strftime('%Y-%m'), start_amount: 0)
+    today = Date.today
+    Month.create!(account: ac, year: today.year, month: today.month, start_amount: 0)
     redirect_to account_path(ac.id)
   end
 

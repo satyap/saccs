@@ -1,13 +1,13 @@
 %h1
-  %span#toggle_months{onclick: '$("#month_list, #toggle_months_open, #toggle_months_close").toggle()'}
+  %span#toggle_months{onclick: '$("#months, #toggle_months_open, #toggle_months_close").toggle()'}
     = @account.name
-    = @month.name
+    = @current_month.name
 
     %span#toggle_months_open >
     %span#toggle_months_close v
 
 #month_list
-  - @account.months.order('name desc').each do |m|
+  - @account.months.in_order.each do |m|
     = link_to m.name, account_path(@account.id, month_id: m.id)
     %br
 
