@@ -12,15 +12,14 @@ class TransactionsController < ApplicationController
   def update
     @transaction = Transaction.find(params[:id])
     @transaction.update(safe_params)
-    Month.find(session[:month_id]).update_amounts!
+    @transaction.account_month.update_amounts!
     redirect_to account_path(id: @transaction.account_id)
   end
 
   def clear
     @transaction = Transaction.find(params[:id])
     @transaction.toggle_clear!
-    @current_month = Month.find(session[:month_id])
-    @current_month.update_amounts!
+    @current_month = @transaction.account_month
     respond_to do |format|
       format.js
     end

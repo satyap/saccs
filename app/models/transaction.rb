@@ -16,6 +16,10 @@ class Transaction < ActiveRecord::Base
     sprintf("%04d-%02d", date_year, date_month)
   end
 
+  def account_month
+    account.months.where(year: date_year, month: date_month).first
+  end
+
   def self.oldmig
     connection.execute(<<-SQL)
     insert into transactions (id, account_id,
