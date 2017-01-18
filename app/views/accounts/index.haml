@@ -1,11 +1,12 @@
-
 = form_for @account do |form|
-  New account:
+  %h1 New account:
   = form.text_field :name
   = submit_tag 'Create'
 
 - if Account.archived.exists?
   .archived.account_list
-    Archived accounts:
-    - Account.archived.order(:name).each do |ac|
-      = link_to ac.name, account_path(ac.id)
+    %h1 Archived accounts:
+    %ul
+      - Account.archived.order(:name).each do |ac|
+        %li= link_to ac.name, account_path(ac.id)
+

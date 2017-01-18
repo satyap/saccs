@@ -9,6 +9,11 @@ class Account < ActiveRecord::Base
     months.in_order.first
   end
 
+  def toggle_archive!
+    self.archived = !self.archived
+    self.save!
+  end
+
   def self.oldmig
     connection.execute("insert into accounts (id,name) select id,name from acold")
   end

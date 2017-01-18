@@ -65,4 +65,26 @@ describe AccountsController do
     end
 
   end
+
+  describe 'archiving accounts' do
+    let(:account) { FactoryGirl.create(:account) }
+
+    it 'archives accounts' do
+      expect {
+        post :toggle_archive, id: account.id
+      }.to change{ account.reload.archived?}.from(false).to(true)
+
+      expect(response).to redirect_to(account_path(account.id))
+    end
+
+    it 'unarchives accounts' do
+      account.update(archived: true)
+
+      expect {
+        post :toggle_archive, id: account.id
+      }.to change{ account.reload.archived?}.from(true).to(false)
+
+      expect(response).to redirect_to(account_path(account.id))
+    end
+  end
 end

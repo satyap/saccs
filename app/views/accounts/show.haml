@@ -15,6 +15,9 @@
         = link_to "#{m.name}", account_path(@account.id, month_id: m.id)
       %br
 
+#archive_controls
+  = link_to @account.archived? ? 'Un-archive account' : 'Archive account', toggle_archive_account_path(@account), method: :post
+
 %div{style: "margin-top: 1em"}
   = render partial: '/transactions/form'
 

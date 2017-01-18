@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resources :months
 
   post 'transactions/clear/:id' => 'transactions#clear', as: 'clear_transaction'
+  post 'accounts/toggle_archive/:id' => 'accounts#toggle_archive', as: 'toggle_archive_account'
 
   root 'accounts#index'
 end

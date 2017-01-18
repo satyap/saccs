@@ -36,4 +36,10 @@ class AccountsController < ApplicationController
     )
     @current_month.update_amounts!
   end
+
+  def toggle_archive
+    ac = Account.find(params[:id])
+    ac.toggle_archive!
+    redirect_to account_path(ac.id)
+  end
 end
