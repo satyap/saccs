@@ -42,4 +42,19 @@ class AccountsController < ApplicationController
     ac.toggle_archive!
     redirect_to account_path(ac.id)
   end
+
+  def transfer
+    ac1 = Account.find(params[:from_account_id])
+    ac2 = Account.find(params[:to_account_id])
+    date = Date.today
+    Transaction.create(account: ac1, amount: params[:amount],
+      date_year: date.year, date_month: date.month, date_day: date.day,
+      description: params[:from_description]
+    )
+    Transaction.create(account: ac2, amount: -params[:amount].to_f,
+      date_year: date.year, date_month: date.month, date_day: date.day,
+      description: params[:to_description]
+    )
+    redirect_to accounts_path
+  end
 end

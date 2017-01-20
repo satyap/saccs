@@ -3,6 +3,14 @@ require 'rails_helper'
 describe AccountsController do
   render_views
 
+  describe 'show main page' do
+    it 'shows the home page' do
+      get :index
+
+      expect(response).to be_successful
+    end
+  end
+
   describe 'create account' do
     it 'creates a new account' do
       expect {
@@ -72,7 +80,7 @@ describe AccountsController do
     it 'archives accounts' do
       expect {
         post :toggle_archive, id: account.id
-      }.to change{ account.reload.archived?}.from(false).to(true)
+      }.to change { account.reload.archived? }.from(false).to(true)
 
       expect(response).to redirect_to(account_path(account.id))
     end
@@ -82,9 +90,40 @@ describe AccountsController do
 
       expect {
         post :toggle_archive, id: account.id
-      }.to change{ account.reload.archived?}.from(true).to(false)
+      }.to change { account.reload.archived? }.from(true).to(false)
 
       expect(response).to redirect_to(account_path(account.id))
+    end
+  end
+
+  describe 'account-to-account transfer' do
+    let(:account1) { FactoryGirl.create(:account) }
+    let(:account2) { FactoryGirl.create(:account) }
+    let(:date) { '2015-10-26' }
+
+    it 'adds transactions to each account' do
+      expect(account1.transactions.count).to eq 0
+      expect(account2.transactions.count).to eq 0
+
+      Timecop.freeze(date) do
+        post :transfer, from_account_id: account1.id, to_account_id: account2.id,
+          from_description: 'from here',
+          to_description: 'to here',
+          amount: 200.40
+      end
+
+      expect(response).to redirect_to(accounts_path)
+
+      expect(account1.transactions.count).to eq 1
+      expect(account2.transactions.count).to eq 1
+
+      expect(account1.transactions.first.amount).to eq 200.40
+      expect(account1.transactions.first.description).to eq 'from here'
+      expect(account1.transactions.first.date).to eq date
+
+      expect(account2.transactions.first.amount).to eq -200.40
+      expect(account2.transactions.first.description).to eq 'to here'
+      expect(account2.transactions.first.date).to eq date
     end
   end
 end

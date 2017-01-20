@@ -1,3 +1,21 @@
+= form_tag transfer_path do
+  %h1 Transfer
+
+  Amount:
+  = text_field_tag :amount
+  %br
+  From:
+  = select_tag :from_account_id, options_for_select(Account.all.map{|a| [a.name, a.id]}), include_blank: true
+  Description:
+  = text_field_tag :from_description
+  %br
+  To:
+  = select_tag :to_account_id, options_for_select(Account.all.map{|a| [a.name, a.id]}), include_blank: true
+  Description:
+  = text_field_tag :to_description
+  %br
+  = submit_tag 'Transfer'
+
 = form_for @account do |form|
   %h1 New account:
   = form.text_field :name
