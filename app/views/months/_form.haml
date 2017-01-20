@@ -1,0 +1,7 @@
+= form_for @month do |m|
+  = submit_tag @month.id ? 'Edit month' : 'Start new month'
+  = m.hidden_field  :account_id
+  = m.text_field  :year, style: 'width: 4em'
+  = m.select :month, 1..12, style: 'width: 14em'
+  Start amount:
+  = m.text_field :start_amount
