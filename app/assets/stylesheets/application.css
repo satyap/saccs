@@ -46,3 +46,7 @@
 .clearance.cleared a {
     color: green;
 }
+
+.right {
+  text-align: right;
+}
