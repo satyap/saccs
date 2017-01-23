@@ -18,23 +18,23 @@ describe TransactionsController do
         xhr :post, :clear, id: transaction.id
       }.to change { transaction.reload.cleared? }.from(false).to(true)
 
-      expect(response.body).to include "Balance:#{td}$259.00"
-      expect(response.body).to include "Cleared balance:#{td}$257.00"
+      expect(response.body).to include "Balance:#{td}$253.00"
+      expect(response.body).to include "Cleared balance:#{td}$255.00"
       expect(response.body).to include "Beginning balance:#{td}$256.00"
-      expect(response.body).to include "Ending balance:#{td}$256.00"
+      expect(response.body).to include "Ending balance:#{td}$253.00"
     end
 
     it 'marks transaction as not cleared' do
-      transaction.update(cleared: true)
+      transaction.update!(cleared: true)
 
       expect {
         xhr :post, :clear, id: account.id
       }.to change { transaction.reload.cleared? }.from(true).to(false)
 
-      expect(response.body).to include "Balance:#{td}$259.00"
+      expect(response.body).to include "Balance:#{td}$253.00"
       expect(response.body).to include "Cleared balance:#{td}$256.00"
       expect(response.body).to include "Beginning balance:#{td}$256.00"
-      expect(response.body).to include "Ending balance:#{td}$256.00"
+      expect(response.body).to include "Ending balance:#{td}$253.00"
     end
   end
 

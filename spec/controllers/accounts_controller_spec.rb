@@ -62,8 +62,7 @@ describe AccountsController do
       latest_month.update!(start_amount: 200)
 
       get :show, id: Account.last.id, month_id: latest_month
-      latest_month.reload
-      expect(latest_month.end_amount).to eq 409
+      expect(latest_month.reload.end_amount).to eq -9
     end
 
     it 'shows the correct transactions' do

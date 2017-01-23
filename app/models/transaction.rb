@@ -6,6 +6,7 @@ class Transaction < ActiveRecord::Base
   def toggle_clear!
     self.cleared = !self.cleared
     self.save!
+    self.account_month.update_amounts!
   end
 
   def date

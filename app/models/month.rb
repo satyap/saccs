@@ -15,16 +15,16 @@ class Month < ActiveRecord::Base
       order('date_day desc, id desc')
   end
 
-  def balance
+  def spending
     transactions.sum(:amount) || 0
   end
 
-  def cleared_balance
+  def cleared_spending
     transactions.cleared.sum(:amount) || 0
   end
 
   def update_amounts!
-    update!(end_amount: start_amount + balance)
+    update!(end_amount: start_amount - spending)
   end
 
   def self.oldmig
