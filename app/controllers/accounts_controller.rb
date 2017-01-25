@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
       account_id: @account.id,
       year: Date.today.year,
       month: Date.today.month,
-      start_amount: @current_month.start_amount
+      start_amount: @current_month.end_amount
     )
     @current_month.update_amounts!
   end
