@@ -10,7 +10,7 @@
 
   <div id="acount_list">
     <%= link_to 'Home', root_path %>
-    <% Account.active.order(:name).each do |ac| %>
+    <% @accounts.active.each do |ac| %>
       <%= link_to ac.name, account_path(ac.id) %>
     <% end %>
   </div>
