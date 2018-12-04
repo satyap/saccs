@@ -30,6 +30,15 @@ class TransactionsController < ApplicationController
     Transaction.destroy(params[:id])
   end
 
+  def search
+    @transactions = Transaction.where("description like ?", '%' << params[:search].to_s << '%')
+    .in_order
+    year = params[:date_year].to_s
+    if year.present?
+      @transactions = @transactions.where(date_year: year)
+    end
+  end
+
   private
 
   def safe_params

@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
 
+  scope :in_order, -> { order('date_year desc, date_month desc, date_day desc')}
   scope :cleared, -> { where(cleared: true) }
 
   def toggle_clear!

@@ -1,0 +1,15 @@
+%table{border: 1, cellspacing: 0, cellpadding: 4}
+  %tr
+    %th Account
+    %th Date
+    %th Description
+    %th Amount
+    %th Cleared?
+    %th &nbsp;
+    %th &nbsp;
+
+  - @transactions.each do |tr|
+    %tr{id: "transaction_#{tr.id}"}
+      %td= tr.account.name
+      = render :partial => '/accounts/transaction_row', locals: {tr: tr}
+

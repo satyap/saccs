@@ -16,6 +16,14 @@
   %br
   = submit_tag 'Transfer'
 
+= form_tag search_path do
+  %h1 Search:
+  = text_field_tag :search
+  Year:
+  = number_field_tag  :date_year, '', style: 'width: 4em'
+  = submit_tag 'Search'
+
+
 = form_for @account do |form|
   %h1 New account:
   = form.text_field :name

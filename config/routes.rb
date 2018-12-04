@@ -62,5 +62,7 @@ Rails.application.routes.draw do
   post 'accounts/toggle_archive/:id' => 'accounts#toggle_archive', as: 'toggle_archive_account'
   post 'accounts/transfer' => 'accounts#transfer', as: 'transfer'
 
+  post 'search' => 'transactions#search', as: 'search'
+
   root 'accounts#index'
 end
